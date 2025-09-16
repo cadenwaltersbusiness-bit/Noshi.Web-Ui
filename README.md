@@ -13,6 +13,8 @@ We would like to officially thank [WarmShao](https://github.com/warmshao) for hi
 
 **WebUI:** is built on Gradio and supports most of `browser-use` functionalities. This UI is designed to be user-friendly and enables easy interaction with the browser agent.
 
+**Enhanced WebUI:** Features a modern, Replit-inspired design with comprehensive controls, dark/light mode, advanced configuration options, and enhanced user experience while maintaining full backward compatibility.
+
 **Expanded LLM Support:** We've integrated support for various Large Language Models (LLMs), including: Google, OpenAI, Azure OpenAI, Anthropic, DeepSeek, Ollama etc. And we plan to add support for even more models in the future.
 
 **Custom Browser Support:** You can use your own browser with our tool, eliminating the need to re-login to sites or deal with other authentication challenges. This feature also supports high-definition screen recording.
@@ -83,12 +85,28 @@ cp .env.example .env
 2. Open `.env` in your preferred text editor and add your API keys and other settings
 
 #### Step 5: Enjoy the web-ui
-1.  **Run the WebUI:**
-    ```bash
-    python webui.py --ip 127.0.0.1 --port 7788
-    ```
-2. **Access the WebUI:** Open your web browser and navigate to `http://127.0.0.1:7788`.
-3. **Using Your Own Browser(Optional):**
+
+1. **Run the Original WebUI:**
+   ```bash
+   python webui.py --ip 127.0.0.1 --port 7788
+   ```
+
+2. **Run the Enhanced WebUI (Recommended):**
+   ```bash
+   python webui.py --enhanced --ip 127.0.0.1 --port 7788 --theme Replit
+   ```
+   
+   The enhanced UI includes:
+   - Modern Replit-inspired design with dark/light mode toggle
+   - Comprehensive configuration options  
+   - Better organized tabs and controls
+   - Advanced browser inspector and debugging tools
+   - Session history and timeline management
+   - All original functionality preserved
+
+3. **Access the WebUI:** Open your web browser and navigate to `http://127.0.0.1:7788`.
+
+4. **Using Your Own Browser(Optional):**
     - Set `BROWSER_PATH` to the executable path of your browser and `BROWSER_USER_DATA` to the user data directory of your browser. Leave `BROWSER_USER_DATA` empty if you want to use local user data.
       - Windows
         ```env
@@ -144,6 +162,39 @@ TARGETPLATFORM=linux/arm64 docker compose up --build
 - VNC Viewer (for watching browser interactions): Open `http://localhost:6080/vnc.html`
   - Default VNC password: "youvncpassword"
   - Can be changed by setting `VNC_PASSWORD` in your `.env` file
+
+## Enhanced UI & Theming
+
+### Theme System
+The enhanced WebUI features a modern theme system inspired by Replit's design:
+
+- **Dark/Light Mode Toggle**: Switch between themes with the 🌙/☀️ button
+- **System Preference Detection**: Automatically respects your system's theme preference  
+- **Design Tokens**: Centralized styling system for consistent theming
+- **Responsive Design**: Works on desktop, tablet, and mobile devices
+
+### Available Themes
+- `Replit` (default): Dark mode with modern design
+- `ReplitLight`: Light mode variant
+- Legacy themes: `Ocean`, `Glass`, `Monochrome`, `Soft`, etc.
+
+### Running with Themes
+```bash
+# Enhanced UI with Replit theme (recommended)
+python webui.py --enhanced --theme Replit
+
+# Light mode
+python webui.py --enhanced --theme ReplitLight
+
+# Original UI with legacy theme
+python webui.py --theme Ocean
+```
+
+### Customization
+For developers who want to customize the theme:
+- See `THEMING.md` for comprehensive theming documentation
+- Design tokens are in `src/webui/theme/tokens.py`
+- Custom CSS can be added to `src/webui/theme/styles.py`
 
 ## Changelog
 - [x] **2025/01/26:** Thanks to @vvincent1234. Now browser-use-webui can combine with DeepSeek-r1 to engage in deep thinking!
